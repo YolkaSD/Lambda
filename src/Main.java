@@ -1,16 +1,11 @@
-import implementation.NoReturnNoInputImpl;
-import implementation.NoReturnTwoInputImpl;
-import implementation.OneReturnOneInputImpl;
-import implementation.ReturnTwoInputImpl;
-import interfaces.NoReturnNoInput;
-import interfaces.NoReturnTwoInput;
-import interfaces.ReturnOneInput;
-import interfaces.ReturnTwoInput;
+import implementation.*;
+import interfaces.*;
 
 public class Main {
     public static void main(String[] args) {
         int number;
         boolean isGreat;
+        String string;
         // Обычная реализация
         //Без возвращаемого типа, без входящих параметров
         NoReturnNoInput noReturnNoInput = new NoReturnNoInputImpl();
@@ -26,7 +21,10 @@ public class Main {
         //Без возвращаемого типа и с двумя входящими параметрами
         NoReturnTwoInput noReturnTwoInput = new NoReturnTwoInputImpl();
         noReturnTwoInput.noReturnTwoInput("Hello", "World");
-
+        //С возвращаемым типом(Т), с одним входящим параметром(Т) и с дженериком Т
+        TReturnTInput<String> tReturnTInput = new TReturnTInputImpl<>();
+        string = tReturnTInput.tReturnTInput("Hello");
+        System.out.println(string);
 
         //Анонимный класс
         //Без возвращаемого типа, без входящих параметров
@@ -63,6 +61,15 @@ public class Main {
             }
         };
         noReturnTwoInputAnonymous.noReturnTwoInput("Hey", "Man");
+        //С возвращаемым типом(Т), с одним входящим параметром(Т) и с дженериком Т
+        TReturnTInput<Integer> tReturnTInputAnonymous = new TReturnTInput<>() {
+            @Override
+            public Integer tReturnTInput(Integer integer) {
+                return integer * 2;
+            }
+        };
+        number = tReturnTInputAnonymous.tReturnTInput(4);
+        System.out.println(number);
 
         //Лямбда
         //Без возвращаемого типа, без входящих параметров
@@ -81,7 +88,10 @@ public class Main {
         //Без возвращаемого типа и с двумя входящими параметрами
         NoReturnTwoInput noReturnTwoInputLambda = (s1, s2) -> System.out.println("Lambda: " + s1 + "||" + s2);
         noReturnTwoInputLambda.noReturnTwoInput("My", "Cat");
-
+        //С возвращаемым типом(Т), с одним входящим параметром(Т) и с дженериком Т
+        TReturnTInput<Integer> tReturnTInputLambda = (n) -> n * 10;
+        number = tReturnTInputLambda.tReturnTInput(3);
+        System.out.println(number);
 
         //Ссылка на метод
         //Без возвращаемого типа, без входящих параметров
@@ -98,13 +108,18 @@ public class Main {
         //Без возвращаемого типа и с двумя входящими параметрами
         NoReturnTwoInput noReturnTwoInputReference = Main::noReturnReference;
         noReturnTwoInputReference.noReturnTwoInput("My cat ", "is Beautiful");
-
+        //С возвращаемым типом(Т), с одним входящим параметром(Т) и с дженериком Т
+        TReturnTInputImpl<String> tReturnTInputReference = new TReturnTInputImpl<>();
+        TReturnTInput<String> reference = tReturnTInputReference::tReturnTInputReference;
+        string = reference.tReturnTInput("Reference");
+        System.out.println(string);
     }
 
-    public static void NoReturnNoInputReference(){
+    public static void NoReturnNoInputReference() {
         System.out.println("Calling a method reference");
     }
-    public static int OneReturnOneInputReference(int number){
+
+    public static int OneReturnOneInputReference(int number) {
         return number * 3;
     }
 
@@ -115,5 +130,6 @@ public class Main {
     public static void noReturnReference(String s1, String s2) {
         System.out.println("Reference: " + s1 + s2);
     }
+
 
 }
