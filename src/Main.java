@@ -1,7 +1,9 @@
 import implementation.NoReturnNoInputImpl;
+import implementation.NoReturnTwoInputImpl;
 import implementation.OneReturnOneInputImpl;
 import implementation.ReturnTwoInputImpl;
 import interfaces.NoReturnNoInput;
+import interfaces.NoReturnTwoInput;
 import interfaces.ReturnOneInput;
 import interfaces.ReturnTwoInput;
 
@@ -21,6 +23,9 @@ public class Main {
         ReturnTwoInputImpl returnTwoInput = new ReturnTwoInputImpl();
         isGreat = returnTwoInput.twoInput(3, 4);
         System.out.println(isGreat);
+        //Без возвращаемого типа и с двумя входящими параметрами
+        NoReturnTwoInput noReturnTwoInput = new NoReturnTwoInputImpl();
+        noReturnTwoInput.noReturnTwoInput("Hello", "World");
 
 
         //Анонимный класс
@@ -50,6 +55,14 @@ public class Main {
         };
         isGreat = returnTwoInputAnonymous.twoInput(6, 3);
         System.out.println(isGreat);
+        //Без возвращаемого типа и с двумя входящими параметрами
+        NoReturnTwoInput noReturnTwoInputAnonymous = new NoReturnTwoInput() {
+            @Override
+            public void noReturnTwoInput(String s1, String s2) {
+                System.out.println("Anonymous " + s1 + "::" + s2);
+            }
+        };
+        noReturnTwoInputAnonymous.noReturnTwoInput("Hey", "Man");
 
         //Лямбда
         //Без возвращаемого типа, без входящих параметров
@@ -65,6 +78,10 @@ public class Main {
         System.out.println(isGreat);
         isGreat = returnTwoInputLambda.twoInput(3, 5);
         System.out.println(isGreat);
+        //Без возвращаемого типа и с двумя входящими параметрами
+        NoReturnTwoInput noReturnTwoInputLambda = (s1, s2) -> System.out.println("Lambda: " + s1 + "||" + s2);
+        noReturnTwoInputLambda.noReturnTwoInput("My", "Cat");
+
 
         //Ссылка на метод
         //Без возвращаемого типа, без входящих параметров
@@ -78,6 +95,10 @@ public class Main {
         ReturnTwoInput returnTwoInputReference = Main::twoInputReference;
         isGreat = returnTwoInputReference.twoInput(3, 5);
         System.out.println(isGreat);
+        //Без возвращаемого типа и с двумя входящими параметрами
+        NoReturnTwoInput noReturnTwoInputReference = Main::noReturnReference;
+        noReturnTwoInputReference.noReturnTwoInput("My cat ", "is Beautiful");
+
     }
 
     public static void NoReturnNoInputReference(){
@@ -89,6 +110,10 @@ public class Main {
 
     public static boolean twoInputReference(int a, int b) {
         return a > b;
+    }
+
+    public static void noReturnReference(String s1, String s2) {
+        System.out.println("Reference: " + s1 + s2);
     }
 
 }
