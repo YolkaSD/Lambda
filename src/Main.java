@@ -109,8 +109,7 @@ public class Main {
         NoReturnTwoInput noReturnTwoInputReference = Main::noReturnReference;
         noReturnTwoInputReference.noReturnTwoInput("My cat ", "is Beautiful");
         //С возвращаемым типом(Т), с одним входящим параметром(Т) и с дженериком Т
-        TReturnTInputImpl<String> tReturnTInputReference = new TReturnTInputImpl<>();
-        TReturnTInput<String> reference = tReturnTInputReference::tReturnTInputReference;
+        TReturnTInput<String> reference = Main::tReturnTInput;
         string = reference.tReturnTInput("Reference");
         System.out.println(string);
     }
@@ -129,6 +128,9 @@ public class Main {
 
     public static void noReturnReference(String s1, String s2) {
         System.out.println("Reference: " + s1 + s2);
+    }
+    public static <T> T tReturnTInput(T t) {
+        return t;
     }
 
 
