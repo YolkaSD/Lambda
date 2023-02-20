@@ -1,11 +1,11 @@
 package implementation;
 
-import interfaces.OneReturnOneInput;
+import interfaces.ReturnOneInput;
 
-public class OneReturnOneInputImpl implements OneReturnOneInput {
+public class OneReturnOneInputImpl implements ReturnOneInput {
 
     @Override
-    public int oneReturnOneInput(int number) {
+    public int returnOneInput(int number) {
         return number * number;
     }
 }

@@ -1,18 +1,27 @@
 import implementation.NoReturnNoInputImpl;
 import implementation.OneReturnOneInputImpl;
+import implementation.ReturnTwoInputImpl;
 import interfaces.NoReturnNoInput;
-import interfaces.OneReturnOneInput;
+import interfaces.ReturnOneInput;
+import interfaces.ReturnTwoInput;
 
 public class Main {
     public static void main(String[] args) {
+        int number;
+        boolean isGreat;
         // Обычная реализация
         //Без возвращаемого типа, без входящих параметров
         NoReturnNoInput noReturnNoInput = new NoReturnNoInputImpl();
         noReturnNoInput.noReturnNoInput();
         //С возвращаемым типом и с одним входящим параметром
-        OneReturnOneInput oneReturnOneInput = new OneReturnOneInputImpl();
-        int number = oneReturnOneInput.oneReturnOneInput(10);
+        ReturnOneInput returnOneInput = new OneReturnOneInputImpl();
+        number = returnOneInput.returnOneInput(10);
         System.out.println(number);
+        //С возвращаемым типом и с двумя входящими параметрами
+        ReturnTwoInputImpl returnTwoInput = new ReturnTwoInputImpl();
+        isGreat = returnTwoInput.twoInput(3, 4);
+        System.out.println(isGreat);
+
 
         //Анонимный класс
         //Без возвращаемого типа, без входящих параметров
@@ -24,33 +33,51 @@ public class Main {
         };
         noReturnNoInputAnonymous.noReturnNoInput();
         //С возвращаемым типом и с одним входящим параметром
-        OneReturnOneInput oneReturnOneInputAnonymous = new OneReturnOneInput() {
+        ReturnOneInput returnOneInputAnonymous = new ReturnOneInput() {
             @Override
-            public int oneReturnOneInput(int number) {
+            public int returnOneInput(int number) {
                 return number + number;
             }
         };
-        number = oneReturnOneInputAnonymous.oneReturnOneInput(10);
+        number = returnOneInputAnonymous.returnOneInput(10);
         System.out.println(number);
-
+        //С возвращаемым типом и с двумя входящими параметрами
+        ReturnTwoInput returnTwoInputAnonymous = new ReturnTwoInput() {
+            @Override
+            public boolean twoInput(int a, int b) {
+                return a > b;
+            }
+        };
+        isGreat = returnTwoInputAnonymous.twoInput(6, 3);
+        System.out.println(isGreat);
 
         //Лямбда
         //Без возвращаемого типа, без входящих параметров
         NoReturnNoInput noReturnNoInputLambda = () -> System.out.println("Lambda");
         noReturnNoInputLambda.noReturnNoInput();
         //С возвращаемым типом и с одним входящим параметром
-        OneReturnOneInput oneReturnOneInputLambda = n -> n + n * n;
-        number = oneReturnOneInputLambda.oneReturnOneInput(10);
+        ReturnOneInput returnOneInputLambda = n -> n + n * n;
+        number = returnOneInputLambda.returnOneInput(10);
         System.out.println(number);
+        //С возвращаемым типом и с двумя входящими параметрами
+        ReturnTwoInput returnTwoInputLambda = (a, b) -> a < b;
+        isGreat = returnTwoInputLambda.twoInput(6, 5);
+        System.out.println(isGreat);
+        isGreat = returnTwoInputLambda.twoInput(3, 5);
+        System.out.println(isGreat);
 
         //Ссылка на метод
         //Без возвращаемого типа, без входящих параметров
         NoReturnNoInput noReturnNoInputReference = Main::NoReturnNoInputReference;
         noReturnNoInputReference.noReturnNoInput();
         //С возвращаемым типом и с одним входящим параметром
-        OneReturnOneInput oneReturnOneInputReference = Main::OneReturnOneInputReference;
-        number = oneReturnOneInputReference.oneReturnOneInput(10);
+        ReturnOneInput returnOneInputReference = Main::OneReturnOneInputReference;
+        number = returnOneInputReference.returnOneInput(10);
         System.out.println(number);
+        //С возвращаемым типом и с двумя входящими параметрами
+        ReturnTwoInput returnTwoInputReference = Main::twoInputReference;
+        isGreat = returnTwoInputReference.twoInput(3, 5);
+        System.out.println(isGreat);
     }
 
     public static void NoReturnNoInputReference(){
@@ -58,6 +85,10 @@ public class Main {
     }
     public static int OneReturnOneInputReference(int number){
         return number * 3;
+    }
+
+    public static boolean twoInputReference(int a, int b) {
+        return a > b;
     }
 
 }
